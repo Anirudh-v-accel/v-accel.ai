@@ -1,0 +1,36 @@
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.top-bar .btn {
+  width: 10rem;
+}
+
+.top-bar .top-bar-logo {
+  height: 5rem;
+  width: auto;
+  max-width: 35vw;
+}
+
+.top-bar .top-bar-logo img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+@media (max-width: 1000px) {
+  .top-bar {
+    padding: 0.5rem 1.5rem;
+  }
+  .top-bar .top-bar-logo {
+    height: 2.5rem;
+  }
+}
