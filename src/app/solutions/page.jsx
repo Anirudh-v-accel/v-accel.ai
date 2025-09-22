@@ -1,7 +1,7 @@
 "use client";
 import "./spaces.css";
 import { spacesData } from "./spaces.js";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,6 +17,7 @@ const page = () => {
   const spacesRef = useRef(null);
   const scrollTriggerInstances = useRef([]);
   const { navigateWithTransition } = useViewTransition();
+  const [activeFilter, setActiveFilter] = useState("All");
 
   const cleanupScrollTriggers = () => {
     scrollTriggerInstances.current.forEach((instance) => {
@@ -86,6 +87,17 @@ const page = () => {
     };
   }, []);
 
+  // Re-run animations when the filter changes (DOM list updates)
+  useEffect(() => {
+    setupAnimations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFilter]);
+
+  const displayedSpaces =
+    activeFilter === "All"
+      ? spacesData
+      : spacesData.filter((s) => s.categories.includes(activeFilter));
+
   return (
     <>
       <Nav />
@@ -98,27 +110,42 @@ const page = () => {
                 <h1>Solutions</h1>
               </Copy>
               <div className="prop-filters">
-                <div className="filter default">
+                <div
+                  className={`filter ${activeFilter === "All" ? "active" : ""}`}
+                  onClick={() => setActiveFilter("All")}
+                >
                   <Copy delay={1}>
                     <p className="lg">All</p>
                   </Copy>
                 </div>
-                <div className="filter">
+                <div
+                  className={`filter ${activeFilter === "Business Operations" ? "active" : ""}`}
+                  onClick={() => setActiveFilter("Business Operations")}
+                >
                   <Copy delay={1.1}>
                     <p className="lg">Business Operations</p>
                   </Copy>
                 </div>
-                <div className="filter">
+                <div
+                  className={`filter ${activeFilter === "People & Talent" ? "active" : ""}`}
+                  onClick={() => setActiveFilter("People & Talent")}
+                >
                   <Copy delay={1.2}>
                     <p className="lg">People & Talent</p>
                   </Copy>
                 </div>
-                <div className="filter">
+                <div
+                  className={`filter ${activeFilter === "Project & Productivity" ? "active" : ""}`}
+                  onClick={() => setActiveFilter("Project & Productivity")}
+                >
                   <Copy delay={1.3}>
                     <p className="lg">Project & Productivity</p>
                   </Copy>
                 </div>
-                <div className="filter">
+                <div
+                  className={`filter ${activeFilter === "Support & Service" ? "active" : ""}`}
+                  onClick={() => setActiveFilter("Support & Service")}
+                >
                   <Copy delay={1.4}>
                     <p className="lg">Support & Service</p>
                   </Copy>
@@ -129,7 +156,7 @@ const page = () => {
         </section>
         <section className="spaces-list">
           <div className="container" ref={spacesRef}>
-            {spacesData.map((space, index) => (
+            {displayedSpaces.map((space, index) => (
               <a
                 key={space.id}
                 href={space.route}

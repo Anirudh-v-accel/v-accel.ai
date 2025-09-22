@@ -16,6 +16,22 @@
   z-index: 0; /* keep embed below gradient and content */
 }
 
+/* Subtle top vignette overlay above the embed (does not modify the background asset) */
+.hero .hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Darken bright areas near the top and gently fade toward center */
+  background: radial-gradient(
+    120% 70% at 50% 12%,
+    rgba(20, 19, 19, 0.45) 0%,
+    rgba(20, 19, 19, 0.32) 38%,
+    rgba(20, 19, 19, 0.16) 62%,
+    rgba(20, 19, 19, 0) 82%
+  );
+}
+
 .hero .hero-gradient {
   position: absolute;
   bottom: 0;
@@ -46,6 +62,63 @@
   gap: 2rem;
   padding: 1rem;
   z-index: 3;
+  /* Ensure local stacking so the scrim can sit behind text only */
+  isolation: isolate;
+}
+
+/* Frosted, radial scrim behind hero text only (keeps background untouched) */
+.hero .hero-content::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* align to content box for consistent corners */
+  border-radius: 1rem; /* match site card rounding */
+  /* Softer, wide radial that fades on the sides */
+  background: radial-gradient(
+      140% 110% at 50% 42%,
+      rgba(20, 19, 19, 0.50) 0%,
+      rgba(20, 19, 19, 0.36) 56%,
+      rgba(20, 19, 19, 0.22) 78%,
+      rgba(20, 19, 19, 0.10) 90%,
+      rgba(20, 19, 19, 0) 100%
+    ); /* dark-tinted glass matching site background screen */
+  pointer-events: none;
+  z-index: 0;
+  backdrop-filter: blur(8px) saturate(125%);
+  -webkit-backdrop-filter: blur(8px) saturate(125%);
+  /* subtle feather so edges disappear into the background */
+  -webkit-mask-image: radial-gradient(160% 130% at 50% 45%, rgba(0,0,0,1) 36%, rgba(0,0,0,0) 96%);
+  mask-image: radial-gradient(160% 130% at 50% 45%, rgba(0,0,0,1) 36%, rgba(0,0,0,0) 96%);
+}
+
+/* Fallback when backdrop-filter isn't supported */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero .hero-content::before {
+    background: radial-gradient(
+      140% 110% at 50% 42%,
+      rgba(20, 19, 19, 0.48) 0%,
+      rgba(20, 19, 19, 0.34) 56%,
+      rgba(20, 19, 19, 0.20) 78%,
+      rgba(20, 19, 19, 0.10) 90%,
+      rgba(20, 19, 19, 0) 100%
+    );
+  }
+}
+
+/* Keep content above the scrim */
+.hero .hero-content > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhance contrast on headings and copy without altering brand colors */
+.hero .hero-header h1 {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.25);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.hero .hero-tagline p {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .hero .hero-tagline {
@@ -64,6 +137,10 @@
   display: flex;
   gap: 1rem;
   width: 100%;
+  /* Enable 3D space for roll-in animation */
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .hero .hero-stats .stat {
@@ -77,6 +154,9 @@
   backdrop-filter: blur(1rem);
   border-radius: 1rem;
   overflow: hidden;
+  /* Help preserve 3D transforms during GSAP animation */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .hero .hero-stats .stat-count,
@@ -131,6 +211,32 @@
   color: var(--base-100);
 }
 
+/* Refine long-form header typography in What We Do without changing content */
+.what-we-do .what-we-do-header h1 {
+  /* Make large copy feel intentional and readable */
+  font-size: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
+  letter-spacing: -0.06rem; /* calmer than global h1 */
+  line-height: 1.3;
+  max-width: 60ch; /* limit line length for big content */
+  margin: 0 auto 6rem auto;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Hide the spacer only for this header to remove awkward indentation */
+.what-we-do .what-we-do-header h1 .spacer {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .what-we-do .what-we-do-header h1 {
+    font-size: clamp(1.25rem, 4.5vw + 0.5rem, 2rem);
+    margin: 0 auto 4rem auto;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
 .what-we-do .what-we-do-content {
   width: 100%;
   display: flex;
@@ -150,6 +256,34 @@
 .what-we-do .what-we-do-col:nth-child(1) p.lg {
   color: var(--base-300);
   width: 50%;
+}
+
+/* Column header + description refinement (keep content, improve layout) */
+.what-we-do .what-we-do-col:nth-child(1) h1 {
+  /* Override global h1 scale for this smaller context */
+  font-size: clamp(1.5rem, 1.25vw + 1rem, 2rem);
+  letter-spacing: -0.02rem;
+  line-height: 1.2;
+  margin: 0 0 0.75rem 0; /* prevent huge 10rem spacing from container rule */
+  text-align: left;
+}
+
+.what-we-do .what-we-do-col:nth-child(1) p.lg {
+  width: auto; /* undo fixed 50% width */
+  max-width: 60ch; /* use measure for comfortable reading */
+  font-size: clamp(1rem, 0.3vw + 0.95rem, 1.125rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+@media (max-width: 1000px) {
+  .what-we-do .what-we-do-col:nth-child(1) h1 {
+    font-size: clamp(1.25rem, 3.5vw + 0.75rem, 1.75rem);
+    margin-bottom: 0.5rem;
+  }
+  .what-we-do .what-we-do-col:nth-child(1) p.lg {
+    max-width: 100%;
+  }
 }
 
 .what-we-do .what-we-do-col:nth-child(1) p {
@@ -196,6 +330,7 @@
   width: 100vw;
   padding: 10rem 0 0 0;
   color: var(--base-100);
+  background-color: transparent; /* remove section overlay background */
   overflow: hidden;
 }
 
@@ -303,7 +438,7 @@ body a[href*="hiunicornstudio"] {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: var(--base-500);
+  background-color: transparent;
   color: var(--base-200);
 }
 

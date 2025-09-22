@@ -4,7 +4,7 @@ import "./studio.css";
 import Nav from "@/components/Nav/Nav";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import HowWeWork from "@/components/HowWeWork/HowWeWork";
-import Spotlight from "@/components/Spotlight/Spotlight";
+// import Spotlight from "@/components/Spotlight/Spotlight";
 import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import Copy from "@/components/Copy/Copy";
 
@@ -18,18 +18,14 @@ const page = () => {
             <div className="studio-hero-col">
               <Copy delay={0.85}>
                 <p>
-                  We build more than software—we build outcomes. Our team blends
-                  AI, machine learning, and full‑stack engineering to ship
-                  reliable systems that move your business forward.
+                V-Accel.ai delivers impact, not just software. Our expert team unites AI, machine learning, and full-stack engineering to turn ambitious ideas into reliable solutions that drive businesses forward.
                 </p>
               </Copy>
             </div>
             <div className="studio-hero-col">
               <Copy delay={0.85}>
                 <h2>
-                  V‑Accel.ai is a product and service company focused on SaaS,
-                  AI, and enterprise innovation. We partner from discovery to
-                  deployment to deliver measurable results.
+                As a partner for growth, V-Accel.ai helps enterprises unlock innovation through deep SaaS expertise and AI-powered transformation. From discovery through deployment, we engineer every product and service to deliver real, measurable results—accelerating progress for tomorrow's leaders.
                 </h2>
               </Copy>
               <div className="studio-hero-hero-img">
@@ -88,7 +84,7 @@ const page = () => {
           callout="From prototype to production"
           description="Explore how we design, build, and scale AI‑powered platforms across SaaS, analytics, HR, and enterprise systems."
         />
-        <Spotlight />
+        {/* <Spotlight /> */}
       </div>
       <ConditionalFooter />
     </>

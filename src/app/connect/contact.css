@@ -52,6 +52,61 @@
   color: var(--base-300);
 }
 
+/* Text-only contact block (no cards, no glow) */
+.contact-hero .contact-text-only {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.contact-hero .contact-text-only .contact-label {
+  color: var(--base-300);
+  margin-bottom: 0.25rem;
+}
+
+.contact-hero .contact-text-only .contact-line {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-hero .contact-text-only .sep {
+  color: var(--base-400);
+  opacity: 0.65;
+}
+
+.contact-hero .contact-text-only .contact-number {
+  color: var(--base-100);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  transition: background-size 0.35s ease;
+}
+
+.contact-hero .contact-text-only .contact-number:hover,
+.contact-hero .contact-text-only .contact-number:focus {
+  background-size: 100% 2px; /* underline reveal */
+}
+
+.contact-hero .contact-text-only .contact-link {
+  color: var(--base-200);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.25);
+}
+
+.contact-hero .contact-text-only .contact-link:hover,
+.contact-hero .contact-text-only .contact-link:focus {
+  color: var(--base-100);
+  border-bottom-color: rgba(255, 255, 255, 0.65);
+}
+
 .contact-hero .contact-img {
   aspect-ratio: 1;
   border-radius: 2rem;
@@ -75,5 +130,110 @@
 
   .contact-hero .contact-copy-year h1 {
     font-size: 3rem;
+  }
+}
+
+/* Masked glow reveal for contact number */
+.contact-hero .contact-reveal {
+  --x: 50%;
+  --y: 50%;
+  --r: 0px; /* radius of reveal circle, grown via JS on hover */
+  --blur: 64px; /* feather amount for the reveal edge */
+  position: relative;
+  border-radius: 1rem;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.contact-hero .contact-reveal .reveal-content {
+  position: relative;
+  z-index: 1;
+  /* Circular mask that reveals content under the cursor */
+  -webkit-mask-image: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 0, 0, 1) var(--r),
+    rgba(0, 0, 0, 0) calc(var(--r) + var(--blur))
+  );
+  mask-image: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(0, 0, 0, 1) 0,
+    rgba(0, 0, 0, 1) var(--r),
+    rgba(0, 0, 0, 0) calc(var(--r) + var(--blur))
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: transform, -webkit-mask-image, mask-image;
+}
+
+/* Soft glow that follows the cursor to invite interaction */
+.contact-hero .contact-reveal .reveal-glow {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(
+    60% 60% at var(--x) var(--y),
+    rgba(255, 245, 200, 0.25) 0%,
+    rgba(255, 245, 200, 0.10) 18%,
+    rgba(255, 245, 200, 0.0) 40%
+  );
+  filter: blur(18px);
+  transition: opacity 250ms ease;
+}
+
+.contact-hero .contact-reveal:hover .reveal-glow,
+.contact-hero .contact-reveal:focus-within .reveal-glow {
+  opacity: 1;
+}
+
+/* Actions styling */
+.contact-hero .contact-reveal .contact-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.contact-hero .contact-reveal .contact-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 10rem;
+  color: var(--base-100);
+  border: 1px solid var(--glass-border-color);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(8px) saturate(125%);
+  backdrop-filter: blur(8px) saturate(125%);
+}
+
+.contact-hero .contact-reveal .contact-action:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-hero .contact-reveal .contact-number {
+  color: var(--base-100);
+  text-decoration: none;
+}
+
+/* Accessibility: show content when keyboard focusing inside */
+.contact-hero .contact-reveal:focus-within {
+  --r: 220px;
+}
+
+/* Touch/coarse pointers: disable mask so content is visible by default */
+@media (hover: none), (pointer: coarse) {
+  .contact-hero .contact-reveal .reveal-content {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .contact-hero .contact-reveal .reveal-glow {
+    display: none;
   }
 }

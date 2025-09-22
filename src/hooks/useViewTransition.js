@@ -1,8 +1,8 @@
 "use client";
-import { useTransitionRouter } from "next-view-transitions";
+import { useRouter } from "next/navigation";
 
 export const useViewTransition = () => {
-  const router = useTransitionRouter();
+  const router = useRouter();
 
   function slideInOut() {
     document.documentElement.animate(
@@ -48,8 +48,9 @@ export const useViewTransition = () => {
       return;
     }
 
+    // Optionally trigger a simple animation before navigating
+    // slideInOut();
     router.push(href, {
-      onTransitionReady: slideInOut,
       ...options,
     });
   };

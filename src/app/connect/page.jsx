@@ -6,6 +6,35 @@ import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter"
 import Copy from "@/components/Copy/Copy";
 
 const page = () => {
+  // Text-only creative effect: scramble-to-reveal on hover
+  const phoneDisplay = "+91 8610262853";
+  const phoneLink = "918610262853";
+
+  const scrambleNumber = (el, finalText = phoneDisplay) => {
+    if (!el) return;
+    const original = finalText;
+    const chars = "0123456789";
+    let frame = 0;
+    const total = 18; // ~300ms at 60fps
+    const update = () => {
+      const progress = frame / total;
+      const out = original
+        .split("")
+        .map((ch, i) => {
+          if (ch === " " || ch === "+") return ch;
+          return progress > i / original.length
+            ? ch
+            : chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+      el.textContent = out;
+      frame++;
+      if (frame <= total) requestAnimationFrame(update);
+      else el.textContent = original;
+    };
+    requestAnimationFrame(update);
+  };
+
   return (
     <>
       <Nav />
@@ -26,10 +55,21 @@ const page = () => {
             </div>
             <div className="contact-col">
               <div className="contact-info">
-                <div className="contact-info-block">
+                <div className="contact-info-block contact-text-only">
                   <Copy delay={0.85}>
-                    <p>General</p>
-                    <p>contact@v-accel.ai</p>
+                    <p className="contact-label">Ping us at</p>
+                    <p className="contact-line">
+                      <a
+                        className="contact-number"
+                        href={`https://wa.me/${phoneLink}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseEnter={(e) => scrambleNumber(e.currentTarget)}
+                        onFocus={(e) => scrambleNumber(e.currentTarget)}
+                      >
+                        {phoneDisplay}
+                      </a>
+                    </p>
                   </Copy>
                 </div>
                 <div className="contact-info-block">

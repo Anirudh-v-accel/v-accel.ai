@@ -9,6 +9,7 @@ import {
   useLayoutEffect,
 } from "react";
 import { useRouter } from "next/navigation";
+import UnicornScene from "unicornstudio-react/next";
 
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
@@ -24,11 +25,18 @@ const Nav = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef(null);
   const isInitializedRef = useRef(false);
   const splitTextRefs = useRef([]);
   const router = useRouter();
   const lenis = useLenis();
+
+  // Build a URL-safe path for the JSON file served from public/
+  const jsonPath = "/WebGL-JSON/" + encodeURIComponent('"Huly" laser.json');
+  const unicornScale = isMobile ? 0.7 : 1;
+  const unicornDpi = isMobile ? 1 : 1.5;
+  const unicornFps = isMobile ? 30 : 60;
 
   const { navigateWithTransition } = useViewTransition();
 
@@ -48,6 +56,19 @@ const Nav = () => {
       "hop",
       "M0,0 C0.354,0 0.464,0.133 0.498,0.502 0.532,0.872 0.651,1 1,1"
     );
+  }, []);
+
+  // Track mobile layout to tune Unicorn performance props
+  useEffect(() => {
+    const updateIsMobile = () => {
+      if (typeof window !== "undefined") {
+        const mq = window.matchMedia("(max-width: 768px)");
+        setIsMobile(mq.matches);
+      }
+    };
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+    return () => window.removeEventListener("resize", updateIsMobile);
   }, []);
 
   useLayoutEffect(() => {
@@ -226,7 +247,31 @@ const Nav = () => {
   return (
     <div>
       <MenuBtn isOpen={isOpen} toggleMenu={toggleMenu} />
-      <div className="menu" ref={menuRef}>
+      <div
+        className="menu"
+        id="site-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!isOpen}
+        ref={menuRef}
+      >
+        <div className="menu-bg">
+          {isOpen && (
+            <UnicornScene
+              jsonFilePath={jsonPath}
+              width="100%"
+              height="100%"
+              scale={unicornScale}
+              dpi={unicornDpi}
+              fps={unicornFps}
+              lazyLoad={true}
+              production={true}
+              ariaLabel="Menu background animation"
+              className="menu-unicorn-scene"
+            />
+          )}
+        </div>
         <div className="menu-wrapper">
           <div className="col col-1">
             <div className="links">
@@ -237,21 +282,21 @@ const Nav = () => {
               </div>
               <div className="link">
                 <a
-                  href="/studio"
-                  onClick={(e) => handleLinkClick(e, "/studio")}
+                  href="/about"
+                  onClick={(e) => handleLinkClick(e, "/about")}
                 >
                   <h2>About</h2>
                 </a>
               </div>
               <div className="link">
                 <a
-                  href="/spaces"
-                  onClick={(e) => handleLinkClick(e, "/spaces")}
+                  href="/solutions"
+                  onClick={(e) => handleLinkClick(e, "/solutions")}
                 >
                   <h2>Solutions</h2>
                 </a>
               </div>
-              <div className="link">
+              {/* <div className="link">
                 <a
                   href="/sample-space"
                   onClick={(e) => handleLinkClick(e, "/sample-space")}
@@ -266,7 +311,7 @@ const Nav = () => {
                 >
                   <h2>Resources</h2>
                 </a>
-              </div>
+              </div> */}
               <div className="link">
                 <a
                   href="/connect"

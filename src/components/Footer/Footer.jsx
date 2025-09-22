@@ -90,24 +90,7 @@ const Footer = () => {
                 >
                   <h3>Solutions</h3>
                 </a>
-                <a
-                  href="/sample-space"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/sample-space");
-                  }}
-                >
-                  <h3>Featured Case</h3>
-                </a>
-                <a
-                  href="/blueprints"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateWithTransition("/blueprints");
-                  }}
-                >
-                  <h3>Resources</h3>
-                </a>
+            
                 <a
                   href="/connect"
                   onClick={(e) => {
@@ -150,7 +133,7 @@ const Footer = () => {
           </div>
           <div className="footer-copyright">
             <p>&copy; 2025 V-accel Ai Dynamics Pvt Ltd — All rights reserved.</p>
-            <p>Chennai, Tamil Nadu, India</p>
+           
           </div>
         </div>
       </div>

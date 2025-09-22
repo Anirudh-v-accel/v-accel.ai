@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { ReactLenis } from "lenis/react";
 import { ViewTransitions } from "next-view-transitions";
+import GlobalBackground from "@/components/GlobalBackground/GlobalBackground";
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -54,7 +55,8 @@ export default function ClientLayout({ children }) {
   return (
     <ViewTransitions>
       <ReactLenis root options={scrollSettings}>
-        {children}
+        <GlobalBackground />
+        <div className="app-content-layer">{children}</div>
       </ReactLenis>
     </ViewTransitions>
   );

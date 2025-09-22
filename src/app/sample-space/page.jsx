@@ -5,6 +5,7 @@ import Nav from "@/components/Nav/Nav";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import Copy from "@/components/Copy/Copy";
+import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 
 const page = () => {
   return (
@@ -101,13 +102,11 @@ const page = () => {
             <div className="sample-space-col">
               <Copy delay={0.1}>
                 <h3>
-                  Reduced churn by 17% within two quarters through ML‑driven
-                  risk scoring and targeted engagement.
+                Predict and prevent churn with advanced ML models, lifecycle automation, and customer 360 insights–all delivered in a modular, API-first platform.
                 </h3>
 
                 <h3>
-                  Unified data across CRM, billing, and support to surface
-                  high‑value segments and next‑best actions for retention.
+                Seamlessly integrates with CRM and existing data stacks, providing precise alerts, cohort analytics, and automated workflows to maximize lifetime value.
                 </h3>
               </Copy>
               <div className="sample-space-details-img">
@@ -178,16 +177,24 @@ const page = () => {
                   Built with privacy and reliability in mind—governed datasets,
                   auditability, and observability end‑to‑end.
                 </h3>
+                <AnimatedButton
+            route="/connect"
+            label="Get It now"
+            delay={0.2}
+            animateOnScroll={false}
+            
+          />
               </Copy>
             </div>
           </div>
+        
         </section>
-        <CTAWindow
+        {/* <CTAWindow
           img="/sample-space/next-project.jpg"
           header="Next Case"
           callout="Built for scale and reliability"
           description="Explore how V‑Accel.ai delivers AI‑powered platforms that integrate with your stack and scale with your growth."
-        />
+        /> */}
       </div>
       <ConditionalFooter />
     </>

@@ -1,14 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Manrope:wght@200..800&display=swap");
 
 :root {
-  --base-100: rgb(242, 237, 230);
-  --base-200: rgb(204, 200, 194);
-  --base-250: rgb(179, 167, 152);
-  --base-300: rgb(153, 143, 130);
-  --base-350: rgb(128, 119, 108);
-  --base-400: rgb(102, 95, 86);
+  --base-100: rgb(255, 255, 255);
+  --base-200: rgb(255, 255, 255);
+  --base-250: rgb(255, 254, 252);
+  --base-300: rgb(244, 244, 244);
+  --base-350: rgb(255, 255, 255);
+  --base-400: rgb(175, 175, 175);
   --base-450: rgb(31, 29, 29);
   --base-500: rgb(20, 19, 19);
+  /* Glassmorphism design tokens */
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+  --glass-circle-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  --glass-blur: 16px;
+  --glass-saturate: 160%;
+  --glass-hover-blur: 18px;
+  --glass-hover-saturate: 180%;
+  --glass-border-color: rgba(255, 255, 255, 0.35);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --glass-shadow-hover: 0 16px 36px rgba(0, 0, 0, 0.22), 0 3px 6px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  --focus-ring: rgba(255, 255, 255, 0.9);
 }
 
 * {
@@ -25,7 +36,8 @@ body {
 
 section,
 .footer {
-  background-color: var(--base-500);
+  /* Light overlay so the Unicorn background shows through */
+  background-color: rgba(20, 19, 19, 0.25);
 }
 
 img {
@@ -97,6 +109,23 @@ a {
   line-height: 1.4;
   color: var(--base-200);
   border-radius: 0.35rem;
+}
+
+/* Reusable glass utility classes */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass--circle {
+  background: var(--glass-circle-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
 }
 
 span.spacer {

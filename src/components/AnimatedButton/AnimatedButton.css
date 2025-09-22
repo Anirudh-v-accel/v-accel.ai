@@ -5,14 +5,61 @@
   height: auto;
   padding: 0.15rem;
   outline: none;
-  border: none;
   font-size: 0.9rem;
-  background: rgba(242, 237, 230, 0.75);
-  backdrop-filter: blur(10px);
   border-radius: 4rem;
   cursor: pointer;
   margin: 1rem 0;
   transform: scale(0);
+  /* Apple-style glassmorphism base */
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden; /* clip inner highlights */
+  isolation: isolate; /* create new stacking context for glare */
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
+}
+
+.btn::before {
+  /* Hairline inner highlight */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px; /* thickness of highlight */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.25) 24%,
+    rgba(255, 255, 255, 0.12) 65%,
+    rgba(255, 255, 255, 0.28) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; /* show only the 1px ring */
+  pointer-events: none;
+}
+
+.btn::after {
+  /* Subtle glare & tint */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 60% at -10% -30%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 36%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(80% 70% at 120% 120%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 72%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.btn:hover {
+  -webkit-backdrop-filter: blur(var(--glass-hover-blur)) saturate(var(--glass-hover-saturate));
+  backdrop-filter: blur(var(--glass-hover-blur)) saturate(var(--glass-hover-saturate));
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 .btn .circle {
@@ -21,12 +68,27 @@
   margin: 0;
   width: 3rem;
   height: 3rem;
-  background: var(--base-450);
+  /* Tinted glass circle that expands on hover */
+  background: var(--glass-circle-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
   border-radius: 4rem;
   font-size: 1.5rem;
   transform: scale(0);
   overflow: hidden;
-  transition: width 0.5s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: width 0.5s cubic-bezier(0.65, 0, 0.076, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn .circle::before {
+  /* Inner sheen for the circle */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at -10% -30%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 36%, rgba(255, 255, 255, 0) 62%);
+  pointer-events: none;
 }
 
 .btn .icon {
@@ -65,6 +127,8 @@
 
 .btn:hover .circle {
   width: 100%;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 .btn:hover .icon {
@@ -73,4 +137,30 @@
 
 .btn:hover .button-text {
   color: var(--base-100);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))) {
+  .btn {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .btn .circle {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn .circle,
+  .btn .icon,
+  .btn .button-text {
+    transition: none !important;
+  }
 }

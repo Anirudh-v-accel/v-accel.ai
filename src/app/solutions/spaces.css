@@ -1,7 +1,7 @@
 .spaces .spaces-header {
   position: relative;
   width: 100vw;
-  height: 60svh;
+  height: 40svh; /* reduce top space */
   overflow: hidden;
   color: var(--base-100);
   display: flex;
@@ -22,7 +22,7 @@
   flex: 5;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem; /* tighter spacing between title and filters */
 }
 
 .spaces .prop-filters {
@@ -38,6 +38,12 @@
 
 .spaces .prop-filters .filter.default {
   color: var(--base-100);
+}
+
+/* Active filter state */
+.spaces .prop-filters .filter.active {
+  color: var(--base-100);
+  border-bottom: 2px solid var(--base-100);
 }
 
 .spaces .space {
@@ -120,6 +126,9 @@
 }
 
 @media (max-width: 1000px) {
+  .spaces .spaces-header {
+    height: auto; /* let content define height on mobile */
+  }
   .spaces .spaces-header .container {
     align-items: flex-start;
     padding: 2rem;

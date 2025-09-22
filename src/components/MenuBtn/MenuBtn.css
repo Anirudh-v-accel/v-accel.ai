@@ -5,13 +5,63 @@
   transform: translateX(-50%);
   width: 130px;
   height: 53px;
-  background: rgba(242, 237, 230, 0.75);
-  backdrop-filter: blur(10px);
+  /* Apple-style glassmorphism base */
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: var(--glass-shadow);
   border-radius: 8rem;
-  transition: width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  overflow: hidden; /* clip inner highlights */
+  isolation: isolate; /* create new stacking context for glare */
+  transition: width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1), background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
   transform-origin: right;
   cursor: pointer;
   z-index: 1000;
+  -webkit-appearance: none;
+          appearance: none;
+  background-clip: padding-box;
+}
+
+.menu-toggle::before {
+  /* Hairline inner highlight */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.25) 24%,
+    rgba(255, 255, 255, 0.12) 65%,
+    rgba(255, 255, 255, 0.28) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+.menu-toggle::after {
+  /* Subtle glare & tint */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 60% at -10% -30%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 36%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(80% 70% at 120% 120%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 72%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.menu-toggle:hover {
+  -webkit-backdrop-filter: blur(var(--glass-hover-blur)) saturate(var(--glass-hover-saturate));
+  backdrop-filter: blur(var(--glass-hover-blur)) saturate(var(--glass-hover-saturate));
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 .menu-copy {
@@ -32,6 +82,10 @@
   line-height: 0.9;
 }
 
+.menu-toggle:hover .menu-copy p {
+  color: var(--base-100);
+}
+
 .menu-toggle-icon {
   position: absolute;
   top: 2.5px;
@@ -39,10 +93,25 @@
   width: 48px;
   height: 48px;
   border-radius: 100%;
-  background-color: var(--base-450);
+  /* Tinted glass circle matching button style */
+  background: var(--glass-circle-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border-color);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   z-index: 10;
   overflow: hidden;
+}
+
+.menu-toggle-icon::before {
+  /* Inner sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at -10% -30%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 36%, rgba(255, 255, 255, 0) 62%);
+  pointer-events: none;
 }
 
 .hamburger {
@@ -86,4 +155,32 @@
 
 .menu-toggle.opened .menu-bar[data-position="bottom"] {
   transform: translateY(0) rotate(-45deg) scaleX(1.05);
+}
+
+/* Focus ring for keyboard users */
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0))) {
+  .menu-toggle {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .menu-toggle-icon {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle,
+  .menu-toggle-icon,
+  .hamburger,
+  .menu-bar,
+  .menu-copy {
+    transition: none !important;
+  }
 }
