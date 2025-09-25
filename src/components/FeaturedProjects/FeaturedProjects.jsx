@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollLightText from "../ScrollLightText/ScrollLightText";
 
 const FeaturedProjects = () => {
   useEffect(() => {
@@ -68,14 +69,41 @@ const FeaturedProjects = () => {
             <div className="featured-project-card-inner">
               <div className="featured-project-card-content">
                 <div className="featured-project-card-info">
-                  <p>{project.info}</p>
+                  <ScrollLightText
+                    triggerTarget=".featured-project-card"
+                    start="top bottom"
+                    end="+=800"
+                    scrub={true}
+                    charSpacing={0.08}
+                    charDuration={0.1}
+                  >
+                    <p>{project.info}</p>
+                  </ScrollLightText>
                 </div>
                 <div className="featured-project-card-content-main">
                   <div className="featured-project-card-title">
-                    <h2>{project.title}</h2>
+                    <ScrollLightText
+                      triggerTarget=".featured-project-card"
+                      start="top bottom"
+                      end="+=800"
+                      scrub={true}
+                      charSpacing={0.08}
+                      charDuration={0.1}
+                    >
+                      <h2>{project.title}</h2>
+                    </ScrollLightText>
                   </div>
                   <div className="featured-project-card-description">
-                    <p className="lg">{project.description}</p>
+                    <ScrollLightText
+                      triggerTarget=".featured-project-card"
+                      start="top bottom"
+                      end="+=800"
+                      scrub={true}
+                      charSpacing={0.08}
+                      charDuration={0.1}
+                    >
+                      <p className="lg">{project.description}</p>
+                    </ScrollLightText>
                   </div>
                 </div>
               </div>

@@ -16,6 +16,7 @@ import FeaturedProjects from "@/components/FeaturedProjects/FeaturedProjects";
 import ClientReviews from "@/components/ClientReviews/ClientReviews";
 import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import Copy from "@/components/Copy/Copy";
+import ScrollLightText from "@/components/ScrollLightText/ScrollLightText";
 import Script from "next/script";
 
 let isInitialLoad = true;
@@ -369,25 +370,25 @@ export default function Home() {
       <section className="what-we-do">
         <div className="container">
           <div className="what-we-do-header">
-            <Copy delay={0.1}>
-              <h1>
-                <span className="spacer">&nbsp;</span>
-                At V-Accel.ai, advanced AI-driven platforms are tailored for scalability and measurable business growth.
-Unlock the potential of modern SaaS, analytics, and enterprise solutions engineered for real impact your journey to intelligent operations starts here.
-              </h1>
-            </Copy>
+            <ScrollLightText pin={true} pinSpacing={true} start="top 40%" scrub={0.2} charSpacing={0.1} charDuration={0.1} scrollPerChar={14}>
+               <h1>
+                 <span className="spacer">&nbsp;</span>
+                 At V-Accel.ai, advanced AI-driven platforms are tailored for scalability and measurable business growth.
+ Unlock the potential of modern SaaS, analytics, and enterprise solutions engineered for real impact your journey to intelligent operations starts here.
+               </h1>
+            </ScrollLightText>
           </div>
           <div className="what-we-do-content">
             <div className="what-we-do-col">
-              <Copy delay={0.1}>
-                <h1>How we build</h1>
-              </Copy>
+              <ScrollLightText>
+                 <h1>How we build</h1>
+              </ScrollLightText>
 
-              <Copy delay={0.15}>
-                <p className="lg">
-                From vision to launch, our team collaborates with you at every stage—strategy, prototyping, agile development, and continuous enhancement—ensuring that your solutions go live faster and achieve transformative performance.
-                </p>
-              </Copy>
+              <ScrollLightText>
+                 <p className="lg">
+                 From vision to launch, our team collaborates with you at every stage—strategy, prototyping, agile development, and continuous enhancement—ensuring that your solutions go live faster and achieve transformative performance.
+                 </p>
+              </ScrollLightText>
             </div>
             <div className="what-we-do-col">
               <div className="what-we-do-tags" ref={tagsRef}>
@@ -417,14 +418,14 @@ Unlock the potential of modern SaaS, analytics, and enterprise solutions enginee
       <section className="featured-projects-container">
         <div className="container">
           <div className="featured-projects-header-callout">
-            <Copy delay={0.1}>
-              <p>Featured solutions</p>
-            </Copy>
+            <ScrollLightText pin={true} pinSpacing={true} start="top center" scrub={0.2} charSpacing={0.1} charDuration={0.1} scrollPerChar={10}>
+               <h1>Featured solutions</h1>
+            </ScrollLightText>
           </div>
           <div className="featured-projects-header">
-            <Copy delay={0.15}>
-              <h2>A selection of products, solutions, and case studies</h2>
-            </Copy>
+            <ScrollLightText pin={true} pinSpacing={true} start="top center" scrub={0.2} charSpacing={0.1} charDuration={0.1} scrollPerChar={12}>
+               <h2>A selection of products, solutions, and case studies</h2>
+            </ScrollLightText>
           </div>
         </div>
         <FeaturedProjects />
@@ -432,7 +433,19 @@ Unlock the potential of modern SaaS, analytics, and enterprise solutions enginee
       <section className="client-reviews-container">
         <div className="container">
           <div className="client-reviews-header-callout">
-            <h2>What our clients say</h2>
+            <ScrollLightText
+              pin={true}
+              pinSpacing={true}
+              pinTarget=".client-reviews-container"
+              start="center center"
+              scrub={true}
+              charSpacing={0.1}
+              charDuration={0.1}
+              minOpacity={0.05}
+              scrollPerChar={10}
+            >
+              <h2>What our clients say</h2>
+            </ScrollLightText>
           </div>
           <ClientReviews />
         </div>
@@ -477,13 +490,23 @@ Unlock the potential of modern SaaS, analytics, and enterprise solutions enginee
           </div>
           <div className="gallery-callout-col">
             <div className="gallery-callout-copy">
-              <Copy delay={0.1}>
-                <h3>
-                  Explore highlights from our product work—platforms, tools,
-                  and systems designed to transform business operations and
-                  customer experience.
-                </h3>
-              </Copy>
+              <ScrollLightText
+                pin={true}
+                pinSpacing={true}
+                pinTarget=".gallery-callout"
+                start="center center"
+                scrub={true}
+                charSpacing={0.1}
+                charDuration={0.1}
+                scrollPerChar={24}
+                scrollDistance={5000}
+              >
+                 <h3>
+                   Explore highlights from our product work—platforms, tools,
+                   and systems designed to transform business operations and
+                   customer experience.
+                 </h3>
+              </ScrollLightText>
               <AnimatedButton label="Explore Solutions" route="blueprints" />
             </div>
           </div>

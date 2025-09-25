@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import Copy from "../Copy/Copy";
+import ScrollLightText from "../ScrollLightText/ScrollLightText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,16 +112,16 @@ const HowWeWork = () => {
         <div className="container">
           <div className="how-we-work-header-content">
             <div className="how-we-work-header-callout">
-              <Copy delay={0.1}>
+              <ScrollLightText>
                 <p>Process in focus</p>
-              </Copy>
+              </ScrollLightText>
             </div>
-            <Copy delay={0.15}>
+            <ScrollLightText>
               <h3>
                 From discovery to deployment, our delivery model turns ideas
                 into shipped, scalable software
               </h3>
-            </Copy>
+            </ScrollLightText>
             <div className="how-we-work-steps" ref={stepsRef}>
               <div
                 className={`how-we-work-step ${
@@ -168,12 +169,16 @@ const HowWeWork = () => {
           </div>
           <div className="how-we-work-card-copy">
             <div className="how-we-work-card-index-label">
-              <h3>Discovery & Scoping</h3>
+              <ScrollLightText>
+                <h3>Discovery & Scoping</h3>
+              </ScrollLightText>
             </div>
-            <p className="md">
-              We align on goals, constraints, and success metrics. User flows,
-              data sources, and integrations inform scope, timelines, and KPIs.
-            </p>
+            <ScrollLightText>
+              <p className="md">
+                We align on goals, constraints, and success metrics. User flows,
+                data sources, and integrations inform scope, timelines, and KPIs.
+              </p>
+            </ScrollLightText>
           </div>
         </div>
         <div className="how-we-work-card">
@@ -185,12 +190,16 @@ const HowWeWork = () => {
           </div>
           <div className="how-we-work-card-copy">
             <div className="how-we-work-card-index-label">
-              <h3>Solution Design</h3>
+              <ScrollLightText>
+                <h3>Solution Design</h3>
+              </ScrollLightText>
             </div>
-            <p className="md">
-              We draft architecture, data models, and APIs. Prototypes validate
-              user experience and technical approach before full build.
-            </p>
+            <ScrollLightText>
+              <p className="md">
+                We draft architecture, data models, and APIs. Prototypes validate
+                user experience and technical approach before full build.
+              </p>
+            </ScrollLightText>
           </div>
         </div>
         <div className="how-we-work-card">
@@ -202,12 +211,16 @@ const HowWeWork = () => {
           </div>
           <div className="how-we-work-card-copy">
             <div className="how-we-work-card-index-label">
-              <h3>Engineering & QA</h3>
+              <ScrollLightText>
+                <h3>Engineering & QA</h3>
+              </ScrollLightText>
             </div>
-            <p className="md">
-              We implement features with rigorous testing, automation, and
-              observability—ensuring reliability, performance, and security.
-            </p>
+            <ScrollLightText>
+              <p className="md">
+                We implement features with rigorous testing, automation, and
+                observability—ensuring reliability, performance, and security.
+              </p>
+            </ScrollLightText>
           </div>
         </div>
         <div className="how-we-work-card">
@@ -219,12 +232,16 @@ const HowWeWork = () => {
           </div>
           <div className="how-we-work-card-copy">
             <div className="how-we-work-card-index-label">
-              <h3>Deployment & Support</h3>
+              <ScrollLightText>
+                <h3>Deployment & Support</h3>
+              </ScrollLightText>
             </div>
-            <p className="md">
-              We ship to production with CI/CD, monitor SLAs, and support your
-              team with training and iterative improvements post‑launch.
-            </p>
+            <ScrollLightText>
+              <p className="md">
+                We ship to production with CI/CD, monitor SLAs, and support your
+                team with training and iterative improvements post‑launch.
+              </p>
+            </ScrollLightText>
           </div>
         </div>
       </div>

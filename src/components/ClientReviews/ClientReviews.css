@@ -36,10 +36,10 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  border-radius: 1rem;
+  border-radius: 0; /* remove rounding */
   overflow: hidden;
-  padding: 1rem;
-  background-color: var(--base-400);
+  padding: 0; /* remove inset padding so no inner edges show */
+  background-color: transparent; /* fully transparent container */
   will-change: opacity;
 }
 
@@ -67,7 +67,7 @@
 
 .client-reviews .clients-list {
   position: absolute;
-  bottom: 20rem; /* move list upward to reduce gap from review content */
+  bottom: 8rem; /* move list upward to reduce gap from review content */
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);

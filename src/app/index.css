@@ -68,26 +68,7 @@
 
 /* Frosted, radial scrim behind hero text only (keeps background untouched) */
 .hero .hero-content::before {
-  content: "";
-  position: absolute;
-  inset: 0; /* align to content box for consistent corners */
-  border-radius: 1rem; /* match site card rounding */
-  /* Softer, wide radial that fades on the sides */
-  background: radial-gradient(
-      140% 110% at 50% 42%,
-      rgba(20, 19, 19, 0.50) 0%,
-      rgba(20, 19, 19, 0.36) 56%,
-      rgba(20, 19, 19, 0.22) 78%,
-      rgba(20, 19, 19, 0.10) 90%,
-      rgba(20, 19, 19, 0) 100%
-    ); /* dark-tinted glass matching site background screen */
-  pointer-events: none;
-  z-index: 0;
-  backdrop-filter: blur(8px) saturate(125%);
-  -webkit-backdrop-filter: blur(8px) saturate(125%);
-  /* subtle feather so edges disappear into the background */
-  -webkit-mask-image: radial-gradient(160% 130% at 50% 45%, rgba(0,0,0,1) 36%, rgba(0,0,0,0) 96%);
-  mask-image: radial-gradient(160% 130% at 50% 45%, rgba(0,0,0,1) 36%, rgba(0,0,0,0) 96%);
+  content: none; /* remove background card */
 }
 
 /* Fallback when backdrop-filter isn't supported */
@@ -331,7 +312,8 @@
   padding: 10rem 0 0 0;
   color: var(--base-100);
   background-color: transparent; /* remove section overlay background */
-  overflow: hidden;
+  overflow: visible; /* allow pinned/sticky cards to render above following section */
+  z-index: 3; /* keep section above the next section during sticky/pin */
 }
 
 .featured-projects-container .featured-projects-header-callout,
@@ -360,7 +342,15 @@
   width: 100vw;
   height: 120svh;
   color: var(--base-100);
-  padding: 4rem 0 2rem 0;
+  padding: 18rem 0 2rem 0; /* increased top padding to bring header down */
+  z-index: 1; /* sit below featured-projects when cards overlap */
+  background-color: transparent !important; /* override global section overlay */
+}
+
+.client-reviews-container .container {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .client-reviews-container .client-reviews-header-callout {
