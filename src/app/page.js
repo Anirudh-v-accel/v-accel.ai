@@ -18,6 +18,7 @@ import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import Copy from "@/components/Copy/Copy";
 import ScrollLightText from "@/components/ScrollLightText/ScrollLightText";
 import Script from "next/script";
+import BackToTop from "@/components/BackToTop/BackToTop";
 
 let isInitialLoad = true;
 gsap.registerPlugin(ScrollTrigger, CustomEase);
@@ -304,7 +305,7 @@ export default function Home() {
             </div>
             <AnimatedButton
               label="Explore Solutions"
-              route="/spaces"
+              route="/solutions"
               animateOnScroll={false}
               delay={showPreloader ? 8.3 : 1.15}
             />
@@ -370,11 +371,26 @@ export default function Home() {
       <section className="what-we-do">
         <div className="container">
           <div className="what-we-do-header">
-            <ScrollLightText pin={true} pinSpacing={true} start="top 40%" scrub={0.2} charSpacing={0.1} charDuration={0.1} scrollPerChar={14}>
+            <ScrollLightText
+              pin={true}
+              pinSpacing={true}
+              pinTarget=".what-we-do-header"
+              triggerTarget=".what-we-do-header"
+              start="center center"
+              scrub={0.25}
+              charSpacing={0.1}
+              charDuration={0.1}
+              minOpacity={0.08}
+              scrollPerChar={6}
+              scrollDistance={600}
+              shiftYFrom={"0vh"}
+              shiftYTo={"-6vh"}
+              shiftOnlyMobile={true}
+              shiftBreakpoint={1000}
+            >
                <h1>
-                 <span className="spacer">&nbsp;</span>
                  At V-Accel.ai, advanced AI-driven platforms are tailored for scalability and measurable business growth.
- Unlock the potential of modern SaaS, analytics, and enterprise solutions engineered for real impact your journey to intelligent operations starts here.
+Unlock the potential of modern SaaS, analytics, and enterprise solutions engineered for real impact your journey to intelligent operations starts here.
                </h1>
             </ScrollLightText>
           </div>
@@ -456,7 +472,7 @@ export default function Home() {
             <div className="gallery-callout-row">
               <div className="gallery-callout-img gallery-callout-img-1">
                 <img
-                  src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1600&q=80"
+                  src="https://images.unsplash.com/photo-1626863905121-3b0c0ed7b94c?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Dashboard and analytics"
                 />
               </div>
@@ -496,10 +512,10 @@ export default function Home() {
                 pinTarget=".gallery-callout"
                 start="center center"
                 scrub={true}
-                charSpacing={0.1}
-                charDuration={0.1}
-                scrollPerChar={24}
-                scrollDistance={5000}
+                scrollPerChar={12}
+                scrollDistance={1600}
+                mobileScrollDistance={500}
+                mobileBreakpoint={1000}
               >
                  <h3>
                    Explore highlights from our product work—platforms, tools,
@@ -507,7 +523,7 @@ export default function Home() {
                    customer experience.
                  </h3>
               </ScrollLightText>
-              <AnimatedButton label="Explore Solutions" route="blueprints" />
+              <AnimatedButton label="Explore Solutions" route="/solutions" />
             </div>
           </div>
         </div>
@@ -518,6 +534,7 @@ export default function Home() {
         callout="Build with AI. Deliver with confidence."
         description="We design and ship AI‑powered software across SaaS, analytics, HR, and enterprise systems to unlock measurable results."
       />
+      <BackToTop />
       <ConditionalFooter />
     </>
   );

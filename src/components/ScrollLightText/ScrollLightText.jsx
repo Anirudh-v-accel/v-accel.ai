@@ -26,6 +26,15 @@ export default function ScrollLightText({
   anticipatePin = 1,
   pinTarget = null, // optional CSS selector string or HTMLElement to pin instead of the trigger
   triggerTarget = null, // optional CSS selector string or HTMLElement to use as the ScrollTrigger trigger
+  // Optional: shift the entire wrapper vertically during the timeline (e.g., move text up while it lights)
+  shiftYFrom = 0,
+  shiftYTo = 0,
+  shiftOnlyMobile = false,
+  shiftBreakpoint = 1000,
+  // Optional: reduce scroll length on mobile without changing desktop
+  mobileScrollDistance,
+  mobileScrollPerChar,
+  mobileBreakpoint = 1000,
 }) {
   const containerRef = useRef(null);
   const splitRef = useRef(null);
@@ -115,13 +124,29 @@ export default function ScrollLightText({
         // Compute end distance if pinning, so scroll length matches the number of characters
         let computedEnd = end;
         if (pin) {
-          if (typeof scrollDistance === "number") {
+          const isMobile = (
+            typeof window !== "undefined" &&
+            window.matchMedia &&
+            window.matchMedia(`(max-width: ${mobileBreakpoint}px)`).matches
+          );
+
+          if (isMobile && mobileScrollDistance != null) {
+            if (typeof mobileScrollDistance === "number") {
+              computedEnd = `+=${mobileScrollDistance}`;
+            } else if (typeof mobileScrollDistance === "string") {
+              computedEnd = mobileScrollDistance;
+            }
+          } else if (typeof scrollDistance === "number") {
             computedEnd = `+=${scrollDistance}`;
           } else if (typeof scrollDistance === "string") {
             computedEnd = scrollDistance;
           } else {
             const charsCount = split.chars?.length || 0;
-            computedEnd = `+=${Math.max(400, Math.round(charsCount * scrollPerChar))}`;
+            if (isMobile && typeof mobileScrollPerChar === "number") {
+              computedEnd = `+=${Math.max(300, Math.round(charsCount * mobileScrollPerChar))}`;
+            } else {
+              computedEnd = `+=${Math.max(400, Math.round(charsCount * scrollPerChar))}`;
+            }
           }
         }
 
@@ -149,6 +174,29 @@ export default function ScrollLightText({
           },
         });
 
+        // Optionally, shift the container vertically over the course of the timeline
+        const totalChars = split.chars?.length || 0;
+        const lastTime = Math.max(0, (totalChars - 1) * charSpacing + charDuration);
+        const enableShift = (shiftYFrom !== 0 || shiftYTo !== 0) && (
+          !shiftOnlyMobile || (
+            typeof window !== "undefined" &&
+            window.matchMedia &&
+            window.matchMedia(`(max-width: ${shiftBreakpoint}px)`).matches
+          )
+        );
+        if (enableShift) {
+          gsap.set(containerRef.current, { y: shiftYFrom });
+          tl.to(
+            containerRef.current,
+            {
+              y: shiftYTo,
+              duration: lastTime || 1,
+              ease: "none",
+            },
+            0
+          );
+        }
+
         split.chars.forEach((char, index) => {
           tl.to(
             char,
@@ -173,7 +221,7 @@ export default function ScrollLightText({
         }
       };
     },
-    { scope: containerRef, dependencies: [start, end, scrub, mode, charSpacing, charDuration, charWindow, minOpacity, maxOpacity, pin, pinSpacing, anticipatePin, scrollPerChar, scrollDistance, pinTarget, triggerTarget] }
+    { scope: containerRef, dependencies: [start, end, scrub, mode, charSpacing, charDuration, charWindow, minOpacity, maxOpacity, pin, pinSpacing, anticipatePin, scrollPerChar, scrollDistance, pinTarget, triggerTarget, shiftYFrom, shiftYTo, shiftOnlyMobile, shiftBreakpoint, mobileScrollDistance, mobileScrollPerChar, mobileBreakpoint] }
   );
 
   const shouldWrap = pin || React.Children.count(children) !== 1;

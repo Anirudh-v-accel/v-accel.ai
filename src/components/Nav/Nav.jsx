@@ -331,8 +331,8 @@ const Nav = () => {
                   <p>sales@v-accel.ai</p>
                 </div>
                 <div className="menu-meta">
-                  <p>Studio Address</p>
-                  <p>Chennai</p>
+                  <p>Where We Craft</p>
+                  <p>SM Towers, Perungudi, Chennai</p>
                   <p>Tamil Nadu, India</p>
                 </div>
               </div>

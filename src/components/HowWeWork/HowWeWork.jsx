@@ -20,7 +20,6 @@ const HowWeWork = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const scrollTriggersRef = useRef([]);
-
   const checkMobile = () => {
     setIsMobile(window.innerWidth <= 1000);
   };
@@ -163,7 +162,7 @@ const HowWeWork = () => {
         <div className="how-we-work-card">
           <div className="how-we-work-card-img">
             <img
-              src="https://images.unsplash.com/photo-1551281044-8d8d0da9d0f9?auto=format&fit=crop&w=1600&q=80"
+              src="https://images.unsplash.com/photo-1726250873166-814c1f2cb74b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Discovery and scoping"
             />
           </div>
@@ -175,8 +174,7 @@ const HowWeWork = () => {
             </div>
             <ScrollLightText>
               <p className="md">
-                We align on goals, constraints, and success metrics. User flows,
-                data sources, and integrations inform scope, timelines, and KPIs.
+              Leaders align on goals, risks, and what success looks like. We turn key user journeys, data, and integrations into a clear, time boxed roadmap with budget and milestones. Approve the plan and a quick prototype follows, so progress and value are visible early.
               </p>
             </ScrollLightText>
           </div>
@@ -184,7 +182,7 @@ const HowWeWork = () => {
         <div className="how-we-work-card">
           <div className="how-we-work-card-img">
             <img
-              src="https://images.unsplash.com/photo-1526378722484-cc6c0d622d82?auto=format&fit=crop&w=1600&q=80"
+              src="https://images.unsplash.com/photo-1753715613388-7e03410b1dce?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Solution design"
             />
           </div>
@@ -196,8 +194,7 @@ const HowWeWork = () => {
             </div>
             <ScrollLightText>
               <p className="md">
-                We draft architecture, data models, and APIs. Prototypes validate
-                user experience and technical approach before full build.
+              We design the simplest, safest solution to meet the goal. You get clear architecture, data models, and APIs plus clickable prototypes to test before the full build. Approve the design pack to lock scope, cost, and timelines with confidence.
               </p>
             </ScrollLightText>
           </div>
@@ -217,8 +214,7 @@ const HowWeWork = () => {
             </div>
             <ScrollLightText>
               <p className="md">
-                We implement features with rigorous testing, automation, and
-                observability—ensuring reliability, performance, and security.
+              We ship in small, safe steps. Automated tests, peer reviews, and performance checks protect quality, while live health dashboards keep everyone informed. Controlled rollouts make releases smooth, secure, and easy to reverse if needed.
               </p>
             </ScrollLightText>
           </div>
@@ -238,8 +234,7 @@ const HowWeWork = () => {
             </div>
             <ScrollLightText>
               <p className="md">
-                We ship to production with CI/CD, monitor SLAs, and support your
-                team with training and iterative improvements post‑launch.
+              We launch carefully and support continuously. Automated deploys, monitoring, and runbooks keep systems healthy; training and regular reviews keep teams enabled and features improving. Set the go live date and quarterly reviews to track impact and ROI.
               </p>
             </ScrollLightText>
           </div>

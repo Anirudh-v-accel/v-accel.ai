@@ -153,8 +153,9 @@
 }
 
 @media (max-width: 1000px) {
+  /* Let the section grow to fit content to avoid overlapping next section */
   .client-reviews-container {
-    height: 100svh;
+    height: auto;
   }
 
   .client-reviews .client-reviews-wrapper {
@@ -165,13 +166,30 @@
     padding: 0;
   }
 
+  /* Flow layout on mobile: stack image, text, then client list */
+  .client-reviews .client-review-content {
+    position: static;
+  }
+
   .client-reviews .clients-list {
-    bottom: 2rem;
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    justify-content: center;
+    overflow-x: auto; /* allow horizontal scroll if needed */
+  }
+
+  .client-reviews .client-review-copy h3 {
+    font-size: clamp(1rem, 4.2vw, 1.125rem);
   }
 
   .client-reviews p.client-name {
     font-size: 0.75rem;
-    padding-right: 2rem;
+    padding-right: 0;
     white-space: normal;
   }
 

@@ -126,6 +126,11 @@
 }
 
 @media (max-width: 1000px) {
+  /* Offset for fixed TopBar on mobile so content starts below header */
+  .page.spaces {
+    padding-top: 4rem; /* approx TopBar height (logo 2.5rem + padding + CTA) */
+  }
+
   .spaces .spaces-header {
     height: auto; /* let content define height on mobile */
   }

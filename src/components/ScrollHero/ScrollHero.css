@@ -1,0 +1,115 @@
+/* Scoped styles for ScrollHero, mirroring cg-nvg8-scroll-animation/styles.css */
+
+.scroll-hero {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* transparent as requested */
+  color: #e3e3db;
+  overflow: hidden;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-hero .hero-header {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  will-change: transform, opacity;
+}
+
+.scroll-hero .animated-icons {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex; /* match original */
+  align-items: center;
+  gap: 1rem;
+  will-change: transform;
+  z-index: 2;
+}
+
+.scroll-hero .animated-icon {
+  flex: 1;
+  aspect-ratio: 1;
+  will-change: transform;
+}
+
+.scroll-hero .animated-text {
+  position: relative;
+  max-width: 1000px;
+  text-align: center;
+  color: #e3e3db; /* light text for dark background */
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.scroll-hero .text-segment {
+  opacity: 0;
+}
+
+.scroll-hero .placeholder-icon {
+  margin-top: -10px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  vertical-align: middle;
+  will-change: transform;
+  visibility: hidden;
+}
+
+.scroll-hero .animated-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* match original */
+}
+
+/* Ensure SVG icons from react-icons fill their containers */
+.scroll-hero .animated-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Duplicated icons appended to body */
+.duplicate-icon {
+  position: absolute; /* match original */
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 3;
+}
+.duplicate-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.duplicate-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 1000px) {
+  .scroll-hero .hero-header {
+    top: 45%;
+    width: 100%;
+  }
+
+  .scroll-hero .placeholder-icon {
+    margin-top: -4px;
+    width: 30px;
+    height: 30px;
+  }
+}

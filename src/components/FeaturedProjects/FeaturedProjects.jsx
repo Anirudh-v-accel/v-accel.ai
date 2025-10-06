@@ -38,7 +38,7 @@ const FeaturedProjects = () => {
               start: isMobile ? "top 85%" : "top 100%",
               end: "top -75%",
               scrub: true,
-              pin: featuredProjectCard,
+              pin: isMobile ? false : featuredProjectCard,
               pinSpacing: false,
             },
           }

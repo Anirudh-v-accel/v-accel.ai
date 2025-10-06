@@ -7,36 +7,14 @@ import HowWeWork from "@/components/HowWeWork/HowWeWork";
 // import Spotlight from "@/components/Spotlight/Spotlight";
 import CTAWindow from "@/components/CTAWindow/CTAWindow";
 import Copy from "@/components/Copy/Copy";
+import ScrollHero from "@/components/ScrollHero/ScrollHero";
 
 const page = () => {
   return (
     <>
       <Nav />
       <div className="page studio">
-        <section className="studio-hero">
-          <div className="container">
-            <div className="studio-hero-col">
-              <Copy delay={0.85}>
-                <p>
-                V-Accel.ai delivers impact, not just software. Our expert team unites AI, machine learning, and full-stack engineering to turn ambitious ideas into reliable solutions that drive businesses forward.
-                </p>
-              </Copy>
-            </div>
-            <div className="studio-hero-col">
-              <Copy delay={0.85}>
-                <h2>
-                As a partner for growth, V-Accel.ai helps enterprises unlock innovation through deep SaaS expertise and AI-powered transformation. From discovery through deployment, we engineer every product and service to deliver real, measurable results—accelerating progress for tomorrow's leaders.
-                </h2>
-              </Copy>
-              <div className="studio-hero-hero-img">
-                <img
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80"
-                  alt="V-Accel.ai team collaborating"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <ScrollHero />
         <section className="more-facts">
           <div className="container">
             <div className="more-facts-items">
@@ -78,12 +56,7 @@ const page = () => {
             <HowWeWork />
           </div>
         </section>
-        <CTAWindow
-          img="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1600&q=80"
-          header="Solutions"
-          callout="From prototype to production"
-          description="Explore how we design, build, and scale AI‑powered platforms across SaaS, analytics, HR, and enterprise systems."
-        />
+       
         {/* <Spotlight /> */}
       </div>
       <ConditionalFooter />
