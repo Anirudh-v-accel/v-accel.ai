@@ -86,6 +86,8 @@
   width: 50%;
   display: flex;
   gap: 2em;
+  position: relative; /* ensure socials sit above background logo */
+  z-index: 1;
 }
 
 .socials .sub-col {
@@ -108,6 +110,23 @@
 .menu-meta p:nth-child(1) {
   color: var(--base-400);
   margin-bottom: 1rem;
+}
+
+/* Desktop-only brand logo: center-right placement */
+.menu-logo {
+  position: absolute;
+  top: 50%;
+  right: 10rem;
+  transform: translateY(-150%);
+  display: block;
+  pointer-events: none; /* allow clicks to pass through */
+  z-index: 0; /* behind socials */
+}
+.menu-logo img {
+  width: clamp(880px, 28vw, 420px);
+  height: auto;
+  object-fit: contain; /* maintain aspect ratio */
+  opacity: 0.14; /* subtle presence */
 }
 
 /* SplitText mask styles */
@@ -140,6 +159,9 @@
   }
 
   .menu-commissions {
+    display: none;
+  }
+  .menu-logo {
     display: none;
   }
 }

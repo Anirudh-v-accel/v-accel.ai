@@ -296,22 +296,7 @@ const Nav = () => {
                   <h2>Solutions</h2>
                 </a>
               </div>
-              {/* <div className="link">
-                <a
-                  href="/sample-space"
-                  onClick={(e) => handleLinkClick(e, "/sample-space")}
-                >
-                  <h2>Case Study</h2>
-                </a>
-              </div>
-              <div className="link">
-                <a
-                  href="/blueprints"
-                  onClick={(e) => handleLinkClick(e, "/blueprints")}
-                >
-                  <h2>Resources</h2>
-                </a>
-              </div> */}
+         
               <div className="link">
                 <a
                   href="/connect"
@@ -340,10 +325,14 @@ const Nav = () => {
                 <div className="menu-meta">
                   <p>Social</p>
                   <p>LinkedIn</p>
-                  <p>GitHub</p>
+                  <p>Instagram</p>
                   <p>YouTube</p>
                 </div>
               </div>
+            </div>
+            {/* Desktop-only brand logo on the right side */}
+            <div className="menu-logo" aria-hidden="true">
+              <img src="/logos/logo.svg" alt="V-Accel logo" />
             </div>
           </div>
         </div>

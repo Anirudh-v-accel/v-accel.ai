@@ -90,17 +90,17 @@ const page = () => {
                   <Copy delay={1.3}>
                     <p>Social</p>
                     <p>LinkedIn</p>
-                    <p>GitHub</p>
+                    <p>Instagram</p>
                     <p>YouTube</p>
                   </Copy>
                 </div>
               </div>
-              <div className="contact-img">
+              {/* <div className="contact-img">
                 <img
                   src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80"
                   alt="V-Accel.ai workspace"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

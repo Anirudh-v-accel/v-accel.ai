@@ -119,3 +119,70 @@
   min-height: 100svh;
   background-color: var(--base-500);
 }
+
+/* Team Section hero heading (Words on Top) */
+.team-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 60svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 0 2rem;
+}
+.team-hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team-hero h1 {
+  width: 75%;
+  color: var(--base-300);
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 0.95;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+  .team-hero {
+    min-height: 40svh;
+    padding: 3rem 0 1rem;
+  }
+  .team-hero h1 {
+    width: 100%;
+  }
+}
+
+/* Team caption below the single card */
+.team-caption {
+  position: relative;
+  width: 100vw;
+  padding: 3rem 0 5rem;
+  text-align: center;
+}
+.team-caption .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.team-caption h2 {
+  color: var(--base-200);
+  letter-spacing: -0.1rem;
+}
+.team-caption p {
+  color: var(--base-400);
+  max-width: 900px;
+}
+
+@media (max-width: 1000px) {
+  .team-caption {
+    padding: 2rem 0 3rem;
+  }
+  .team-caption p {
+    max-width: 95%;
+  }
+}

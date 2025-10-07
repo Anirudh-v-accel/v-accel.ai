@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import Copy from "@/components/Copy/Copy";
 import "./ScrollHero.css";
 
 export default function ScrollHero() {
@@ -45,21 +46,14 @@ export default function ScrollHero() {
       textAnimationOrder.push({ segment, originalIndex: index });
     });
 
-    // shuffle
-    for (let i = textAnimationOrder.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [textAnimationOrder[i], textAnimationOrder[j]] = [
-        textAnimationOrder[j],
-        textAnimationOrder[i],
-      ];
-    }
-
     const isMobile = typeof window !== "undefined" && window.innerWidth <= 1000;
-    const headerIconSize = isMobile ? 30 : 60;
+    const headerIconSize = isMobile ? 48 : 72;
     const currentIconSize = iconElements[0]
       ? iconElements[0].getBoundingClientRect().width || headerIconSize
       : headerIconSize;
-    const exactScale = currentIconSize ? headerIconSize / currentIconSize : 1;
+    const exactScale = currentIconSize
+      ? Math.max(1, headerIconSize / currentIconSize)
+      : 1;
 
     // clean up any previous duplicates if hot reloaded
     if (duplicatesRef.current) {
@@ -315,8 +309,12 @@ export default function ScrollHero() {
   return (
     <section className="scroll-hero" ref={rootRef}>
       <div className="hero-header" ref={headerRef}>
-        <h1>V-Accel.ai</h1>
-        <p>We are an AI + product engineering studio for enterprises and SaaS.</p>
+        <Copy animateOnScroll={true}>
+          <h1>V-Accel.ai</h1>
+        </Copy>
+        <Copy animateOnScroll={true} delay={0.15}>
+          <p>We are an AI + product engineering studio for enterprises and SaaS.</p>
+        </Copy>
       </div>
 
       <div className="animated-icons" ref={iconsRef}>
@@ -346,13 +344,13 @@ export default function ScrollHero() {
 
       <h1 className="animated-text" ref={textRef}>
         <div className="placeholder-icon"></div>
-        <span className="text-segment">An AI + product engineering studio.</span>
+        <span className="text-segment">Turn ideas into shipped products.</span>
         <div className="placeholder-icon"></div>
-        <span className="text-segment">We turn ideas into reliable software.</span>
+        <span className="text-segment">From concept to production—with rigor and speed.</span>
         <div className="placeholder-icon"></div>
-        <span className="text-segment">Partner to enterprises and SaaS teams.</span>
+        <span className="text-segment">We plug into your stack, team, and roadmap.</span>
         <div className="placeholder-icon"></div>
-        <span className="text-segment">Measured by outcomes, not hype.</span>
+        <span className="text-segment">Measured by outcomes not buzzwords.</span>
         <div className="placeholder-icon"></div>
       </h1>
     </section>
